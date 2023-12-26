@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Diagnostics;
+using ClassesForExercise;
 
 namespace CoreCollectionsAsync
 {
@@ -104,6 +105,10 @@ namespace CoreCollectionsAsync
         }
 
 
+        public static void WhenCarShutDown(object sender, EventArgs args)
+        {
+            Console.WriteLine("Car Shutdown");
+        }
         static void Main(string[] args)
         {
 
@@ -119,15 +124,23 @@ namespace CoreCollectionsAsync
 
             //4. Prepare a full breakfast using async methods! 
 
-            BreakfastWIthThreads.MakeBreakfastDemoAsync_5().Wait();
-           
-            
+            // BreakfastWIthThreads.MakeBreakfastDemoAsync_5().Wait();
 
-         
+            ElectricCar e1 = CreateCar(1);
+
+
+
+
             //5. Prepare a full breakfast ysing async and a Any method + list of tasks            
             //BreakfastWIthThreads.MakeBreakfastDemoAsync_5().Wait();
 
-          
+
+        }
+        public static ElectricCar CreateCar(int id)
+        {
+            ElectricCar e1 = new ElectricCar(id);
+            e1.OnCarShutDown += WhenCarShutDown;
+            return e1;
         }
 
 
